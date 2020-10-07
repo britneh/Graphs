@@ -82,7 +82,7 @@ class Graph:
                 for neighbor in self.get_neighbors(v):
                     stack.push(neighbor)
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited = None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
@@ -103,7 +103,7 @@ class Graph:
         # Traverse through the graph using recursion
         for neighbor in self.vertices[starting_vertex]:
             if neighbor not in visited:
-                self.dft_recursive(neighbor, visit)
+                self.dft_recursive(neighbor, visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -131,21 +131,31 @@ class Graph:
                     # If so, return path
                     return path
             # Mark it as visited
-            visited.add(path)
+            visited.add(last)
             # Then add a path to its neighbors to the back of the queue
-            queue.enqueue(path)
+            for neighbor in self.get_neighbor(last):
+                new_path = path.copy()
+                new_path.append(neighbor)
+        return None
                 # Copy the path
                 # Append the neighbor to the back
 
-    def dfs(self, starting_vertex, destination_vertex):
+    def dfs(self, starting_vertex, visited = None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        if visited is None:
+            visited = set()
+        
+        print(starting_vertex)
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+        for neighbor in self.get_neighbors(starting_vertex):
+            if neighbor not in visited:
+                self.dft_recursive(neighbor, visited)
+
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited = None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
