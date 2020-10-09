@@ -39,14 +39,21 @@ class SocialGraph:
         The number of users must be greater than the average number of friendships.
         """
         # Reset graph
+        fn = ['Susan', 'Bob', 'Joy', 'Edna']
+        ln = ['Smith', 'Lewis', 'Beckham', 'Holmes', 'Wayne']
         self.last_id = 0
         self.users = {}
         self.friendships = {}
         # !!!! IMPLEMENT ME
 
         # Add users
-
+        for i in range(num_users):
+            self.add_user(random.choice(fn)+''+random.choice(ln))
         # Create friendships
+        for i in self.users:
+            for j in range(random.randrange(0,4)):
+                choose_friends = [i for i in set(self.users) - {i}]
+                self.add_friendship(i, random.choice(choose_friends))
 
     def get_all_social_paths(self, user_id):
         """
@@ -59,6 +66,12 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        visited = {i:False for i in self.users}
+
+        # connections = {}
+        # for i in self.users:
+        #     if i != user_id:
+        #         connections[i] = self.
         return visited
 
 
